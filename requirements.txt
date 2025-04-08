@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+langserve
+langchain
+langchain-community
+langchain-core
+openai
+tiktoken
+pydantic
+chromadb
+sse_starlette
