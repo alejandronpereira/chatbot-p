@@ -4,8 +4,10 @@ langserve
 langchain
 langchain-community
 langchain-core
+langchain-openai
 openai
 tiktoken
 pydantic
 chromadb
-sse_starlette
+sse-starlette
+python-dotenv

@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from langserve import add_routes
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
-from langchain.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_core.runnables import RunnableLambda
 from pydantic import BaseModel
 import logging
@@ -32,10 +32,10 @@ def init_qa():
     loader = TextLoader("data/promtior_info.txt")
     docs = loader.load()
 
-    embeddings = OpenAIEmbeddings(openai_api_key=openai_key)
+    embeddings = OpenAIEmbeddings(api_key=openai_key)
     db = Chroma.from_documents(docs, embeddings)
 
-    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=openai_key)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, api_key=openai_key)
     qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=db.as_retriever())
 
     qa_runnable = RunnableLambda(
